@@ -1,0 +1,46 @@
+name: Release Pipeline
+
+on:
+  workflow_run:
+    workflows: ["Build Pipeline"]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    # 1. Checkout code
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    # 2. Login to Azure
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    # 3. Get AKS credentials
+    - name: Get AKS Credentials
+      run: |
+        az aks get-credentials \
+          --resource-group ${{ secrets.RESOURCE_GROUP }} \
+          --name ${{ secrets.AKS_CLUSTER_NAME }} \
+          --overwrite-existing
+
+    # 4. Install Helm
+    - name: Install Helm
+      uses: azure/setup-helm@v3
+
+    # 5. Set image tag (same as build)
+    - name: Set Image Tag
+      run: echo "TAG=${GITHUB_SHA::7}" >> $GITHUB_ENV
+
+    # 6. Deploy using Helm
+    - name: Deploy to AKS
+      run: |
+        helm upgrade --install hello-app ./hello-chart \
+          --set image.repository=${{ secrets.DOCKER_USERNAME }}/hello-devops \
+          --set image.tag=$TAG
