@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "hello-chart.fullname" . }}
+  labels:
+    {{- include "hello-chart.labels" . | nindent 4 }}
+
+spec:
+  replicas: {{ .Values.replicaCount }}
+
+  selector:
+    matchLabels:
+      {{- include "hello-chart.selectorLabels" . | nindent 6 }}
+
+  template:
+    metadata:
+      labels:
+        {{- include "hello-chart.selectorLabels" . | nindent 8 }}
+
+    spec:
+      containers:
+        - name: hello-devops
+
+          # -----------------------------
+          # Security Context (optional)
+          # -----------------------------
+          {{- with .Values.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+
+          # -----------------------------
+          # Image Configuration
+          # -----------------------------
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+
+          # -----------------------------
+          # Port Configuration
+          # -----------------------------
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+
+          # -----------------------------
+          # Health Checks (VERY IMPORTANT)
+          # -----------------------------
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 10
+
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 5
+
+          # -----------------------------
+          # Resources (optional)
+          # -----------------------------
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+            requests:
+              cpu: "200m"
+              memory: "256Mi"
