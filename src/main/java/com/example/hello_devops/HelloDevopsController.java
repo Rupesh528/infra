@@ -2,33 +2,82 @@ package com.example.hello_devops;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 public class HelloDevopsController {
-
     /**
      * Root endpoint
-     * Used to quickly verify app is running
+     * Gives full project info (like a mini API homepage)
      */
     @GetMapping("/")
-    public String home() {
-        return "Hello from DevOps Pipeline !!!!!!";
+    public Map<String, Object> home() {
+
+        Map<String, Object> response = new HashMap<>();
+
+        response.put("message", "🚀 Hello from DevOps Pipeline!");
+        response.put("description", "This project demonstrates a complete CI/CD pipeline using Spring Boot, Docker, Terraform, AKS, Helm, and GitHub Actions.");
+
+        response.put("endpoints", Map.of(
+                "health", "/health",
+                "version", "/version",
+                "info", "/info"
+        ));
+
+        response.put("github", "https://github.com/Rupesh528/hello-devops");
+
+        response.put("status", "Running on Kubernetes (AKS)");
+
+        return response;
     }
 
     /**
      * Health endpoint
-     * Used by Kubernetes liveness/readiness probes
+     * Used by Kubernetes probes
      */
     @GetMapping("/health")
-    public String health() {
-        return "OK";
+    public Map<String, String> health() {
+        return Map.of(
+                "status", "UP",
+                "message", "Application is healthy ✅"
+        );
     }
 
     /**
      * Version endpoint
-     * Useful in CI/CD to verify deployment version
+     * Used in CI/CD validation
      */
     @GetMapping("/version")
-    public String version() {
-        return "v1.0.0";
+    public Map<String, String> version() {
+        return Map.of(
+                "version", "v1.0.0",
+                "build", "devops-pipeline"
+        );
+    }
+
+    /**
+     * Info endpoint
+     * More detailed project info
+     */
+    @GetMapping("/info")
+    public Map<String, Object> info() {
+
+        Map<String, Object> info = new HashMap<>();
+
+        info.put("project", "End-to-End DevOps Pipeline");
+        info.put("tech_stack", new String[]{
+                "Spring Boot",
+                "Docker",
+                "Kubernetes (AKS)",
+                "Helm",
+                "Terraform",
+                "GitHub Actions"
+        });
+
+        info.put("author", "Rupesh Sahani");
+        info.put("github", "https://github.com/Rupesh528/hello-devops");
+
+        return info;
     }
 }
