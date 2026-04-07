@@ -20,7 +20,7 @@ public class HelloDevopsController {
                 </head>
                 <body style="font-family: Arial; padding: 40px;">
 
-                    <h1>🚀 DevOps Pipeline Project</h1>
+                    <h1>DevOps Pipeline Project</h1>
 
                     <p>
                         This project demonstrates a complete CI/CD pipeline using 
@@ -29,14 +29,14 @@ public class HelloDevopsController {
 
                     <hr>
 
-                    <h2>🛠 Tech Stack</h2>
+                    <h2> Tech Stack</h2>
                     <p>
                         Spring Boot | Docker | Kubernetes (AKS) | Helm | Terraform | GitHub Actions
                     </p>
 
                     <hr>
 
-                    <h2>📡 Available Endpoints</h2>
+                    <h2> Available Endpoints</h2>
                     <ul>
                         <li><a href="/health">/health</a> → Application health</li>
                         <li><a href="/version">/version</a> → App version</li>
@@ -44,7 +44,7 @@ public class HelloDevopsController {
 
                     <hr>
 
-                    <h2>🔗 GitHub</h2>
+                    <h2> GitHub</h2>
                     <p>
                         <a href="https://github.com/Rupesh528/hello-devops" target="_blank">
                             View Source Code
@@ -53,7 +53,7 @@ public class HelloDevopsController {
 
                     <hr>
 
-                    <p><strong>Status:</strong> Running on Kubernetes (AKS) ✅</p>
+                    <p><strong>Status:</strong> Running on Kubernetes (AKS) </p>
 
                 </body>
                 </html>
