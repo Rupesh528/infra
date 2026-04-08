@@ -1,6 +1,6 @@
-# 🚀 Hello DevOps Pipeline (Spring Boot + Terraform + AKS + Helm + GitHub Actions)
+#  DevOps Pipeline (Spring Boot + Terraform + AKS + Helm + GitHub Actions)
 
-## 📌 Overview
+##  Overview
 
 This project demonstrates a complete **end-to-end DevOps pipeline** using modern tools and cloud infrastructure.
 
@@ -14,7 +14,7 @@ It showcases how a simple **Spring Boot application** can be:
 
 ---
 
-## 🧱 Architecture
+##  Architecture
 
 ```
 Developer → GitHub → CI Pipeline → Docker Hub → CD Pipeline → AKS → Helm → Pods → Service → Public IP
@@ -36,7 +36,7 @@ Developer → GitHub → CI Pipeline → Docker Hub → CD Pipeline → AKS → 
 
 ---
 
-## 📂 Project Structure
+##  Project Structure
 
 ```
 hello-devops/
@@ -59,7 +59,7 @@ hello-devops/
 
 ---
 
-## ⚙️ Features
+##  Features
 
 * ✅ Fully automated CI/CD pipeline
 * ✅ Docker image versioning using commit SHA
@@ -70,9 +70,9 @@ hello-devops/
 
 ---
 
-## 🔄 CI/CD Workflow
+##  CI/CD Workflow
 
-### 🔧 Continuous Integration (CI)
+###  Continuous Integration (CI)
 
 Triggered on every push:
 
@@ -83,7 +83,7 @@ Triggered on every push:
 
 ---
 
-### 🚀 Continuous Deployment (CD)
+###  Continuous Deployment (CD)
 
 Triggered after CI:
 
@@ -94,7 +94,7 @@ Triggered after CI:
 
 ---
 
-## 🐳 Docker
+##  Docker
 
 Build image locally:
 
@@ -110,7 +110,7 @@ docker run -p 8080:8080 hello-devops
 
 ---
 
-## ☸️ Kubernetes Deployment
+##  Kubernetes Deployment
 
 Check pods:
 
@@ -126,7 +126,7 @@ kubectl get svc
 
 ---
 
-## 📦 Helm Commands
+##  Helm Commands
 
 Install:
 
@@ -148,7 +148,7 @@ helm uninstall hello-app
 
 ---
 
-## 🏗️ Terraform (Infrastructure)
+##  Terraform (Infrastructure)
 
 Initialize:
 
@@ -170,7 +170,7 @@ terraform destroy
 
 ---
 
-## 🌐 Access Application
+##  Access Application
 
 After deployment:
 
@@ -186,7 +186,7 @@ http://<external-ip>
 
 ---
 
-## 🔐 GitHub Secrets Required
+##  GitHub Secrets Required
 
 * `DOCKER_USERNAME`
 * `DOCKER_PASSWORD`
@@ -196,7 +196,7 @@ http://<external-ip>
 
 ---
 
-## 🧠 Key Learnings
+##  Key Learnings
 
 * End-to-end CI/CD pipeline design
 * Kubernetes deployment strategies
