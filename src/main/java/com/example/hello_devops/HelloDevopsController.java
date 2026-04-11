@@ -46,7 +46,7 @@ public class HelloDevopsController {
 
                     <h2> GitHub</h2>
                     <p>
-                        <a href="https://github.com/Rupesh528/hello-devops" target="_blank">
+                        <a href="https://github.com/Rupesh528/infra" target="_blank">
                             View Source Code
                         </a>
                     </p>
