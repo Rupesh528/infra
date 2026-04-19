@@ -1,0 +1,66 @@
+name: Terraform AKS Deployment
+
+on:
+push:
+branches:
+- main
+pull_request:
+
+jobs:
+terraform:
+name: Deploy AKS using Terraform
+runs-on: ubuntu-latest
+
+```
+defaults:
+  run:
+    working-directory: ./infra   # folder where main.tf exists
+
+steps:
+  # -----------------------------
+  # Checkout Code
+  # -----------------------------
+  - name: Checkout repository
+    uses: actions/checkout@v3
+
+  # -----------------------------
+  # Setup Terraform
+  # -----------------------------
+  - name: Setup Terraform
+    uses: hashicorp/setup-terraform@v3
+
+  # -----------------------------
+  # Azure Login
+  # -----------------------------
+  - name: Azure Login
+    uses: azure/login@v1
+    with:
+      client-id: ${{ secrets.AZURE_CLIENT_ID }}
+      client-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
+      tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+      subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+  # -----------------------------
+  # Terraform Init
+  # -----------------------------
+  - name: Terraform Init
+    run: terraform init
+
+  # -----------------------------
+  # Terraform Validate
+  # -----------------------------
+  - name: Terraform Validate
+    run: terraform validate
+
+  # -----------------------------
+  # Terraform Plan
+  # -----------------------------
+  - name: Terraform Plan
+    run: terraform plan
+
+  # -----------------------------
+  # Terraform Apply
+  # -----------------------------
+  - name: Terraform Apply
+    run: terraform apply -auto-approve
+```
